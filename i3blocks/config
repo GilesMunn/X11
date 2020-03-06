@@ -1,0 +1,51 @@
+separator=false
+separator_block_width=10
+
+border_top=0
+border_left=0
+border_right=0
+border_bottom=0
+
+#[icon]
+#markup=pango
+#label=<span size='xx-large'></span>
+#command=echo " "
+#interval=1
+
+[wireless]
+command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
+interval=10
+separator_block_width=10
+color=#9DABDD
+
+#[battery]
+#command=echo "$(cat /sys/class/power_supply/BAT0/capacity)""%"
+#interval=10
+#border=#928374
+#separator_block_width=10
+
+[ip]
+command=hostname -i | awk '{ print "IP: " $1 }'
+interval=once
+color=#91E78B
+separator_block_width=10
+
+[weather]
+command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
+interval=1600
+color=#A4C2F4
+separator_block_width=10
+
+[time]
+label= 
+command=echo "`date +'%a %d %b'` <b>`date +'%H:%M'`</b> "; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal &
+interval=10
+markup=pango
+border=#928374
+separator_block_width=10
+
+[battery]
+command=/home/giles/.config/i3blocks/commands/battery2
+markup=pango
+interval=10
+separator_block_width=15
